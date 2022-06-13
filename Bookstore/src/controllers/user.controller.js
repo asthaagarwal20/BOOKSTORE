@@ -58,6 +58,22 @@ export const newUser = async (req, res, next) => {
   }
 };
 
+export const login = async (req, res, next) => {
+  try {
+    const data = await UserService.login(req.body);
+    console.log('login token', data);
+    res.status(HttpStatus.OK).json({
+      code: HttpStatus.OK,
+      data: data,
+      message: 'login successfull'
+    });
+  } catch (error) {
+    res.status(HttpStatus.BAD_REQUEST).json({
+      code: HttpStatus.BAD_REQUEST,
+      message: `${error}`
+    });
+  }
+};
 /**
  * Controller to update a user
  * @param  {object} req - request object

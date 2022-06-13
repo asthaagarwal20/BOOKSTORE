@@ -23,6 +23,25 @@ export const newUser = async (body) => {
   }
 };
 
+export const login = async (body) => {
+  const emailexist = await User.findOne({ email: body.email });
+  console.log(emailexist);
+  if (emailexist) {
+    let match = await bcrypt.compare(body.password, emailexist.password);
+    if (match) {
+      let token = jwt.sign(
+        { id: emailexist._id, email: emailexist.email },
+        process.env.SECRET_KEY
+      );
+      return token;
+    } else {
+      throw new Error('Password did not match');
+    }
+  } else {
+    throw new Error('user does not exist');
+  }
+};
+
 //update single user
 export const updateUser = async (_id, body) => {
   const data = await User.findByIdAndUpdate(

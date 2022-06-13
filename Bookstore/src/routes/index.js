@@ -1,5 +1,6 @@
 import express from 'express';
 const router = express.Router();
+import bookRoute from './book.route';
 
 import userRoute from './user.route';
 /**
@@ -12,6 +13,7 @@ const routes = () => {
     res.json('Welcome');
   });
   router.use('/users', userRoute);
+  router.use('/book',bookRoute);
 
   return router;
 };

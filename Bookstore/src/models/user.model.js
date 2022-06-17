@@ -10,6 +10,9 @@ const userSchema = new Schema(
     },
     password: {
       type: String
+    },
+    mobileNo:{
+      type:String
     }
   },
   {
@@ -18,3 +21,6 @@ const userSchema = new Schema(
 );
 
 export default model('User', userSchema);
+
+
+
